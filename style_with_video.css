@@ -1,0 +1,1189 @@
+
+@charset "UTF-8";
+
+/* =================================
+   01. COLOR & BASIC SETTINGS
+================================= */
+
+:root {
+  --white: #ffffff;
+  --pink: #e8bfcc;
+  --pink-light: #fbf5f7;
+  --pink-dark: #bd879b;
+  --cream: #fffdf9;
+  --text: #554e52;
+  --muted: #93888d;
+  --line: #eadfe2;
+
+  /* ナビゲーションの高さに合わせた余白 */
+  --header-height: 65px;
+  --jump-gap: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 0;
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--text);
+  font-family:
+    "Hiragino Kaku Gothic ProN",
+    "Yu Gothic",
+    "Meiryo",
+    sans-serif;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+h1, h2, h3, h4, p {
+  margin-top: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+}
+
+/* HOMEのみ一番上まで戻る */
+#home {
+  scroll-margin-top: 0;
+}
+
+/* その他は見出しがメニュー直下に来る位置へ */
+#about,
+#skills,
+#works,
+#contact {
+  scroll-margin-top:
+    calc(var(--header-height) + var(--jump-gap) - 30px);
+}
+
+
+/* =================================
+   02. HEADER
+================================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.96);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: auto;
+  padding: 16px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-logo {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: var(--pink-dark);
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  font-family: Georgia, serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--pink-dark);
+}
+
+.menu-toggle {
+  display: none;
+}
+
+
+/* =================================
+   03. HOME
+================================= */
+
+.hero {
+  min-height: 90vh;
+  padding: 100px 24px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  background:
+    radial-gradient(
+      ellipse at 20% 25%,
+      #fdf1f5 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 85% 80%,
+      #faf0f3 0%,
+      transparent 40%
+    ),
+    var(--white);
+}
+
+.hero-content {
+  width: min(100%, 750px);
+  padding: 80px 30px;
+  border: 1px solid var(--line);
+  position: relative;
+}
+
+.hero-content::before,
+.hero-content::after {
+  content: "✦";
+  position: absolute;
+  color: var(--pink);
+  font-size: 20px;
+}
+
+.hero-content::before {
+  top: -14px;
+  left: -10px;
+}
+
+.hero-content::after {
+  bottom: -14px;
+  right: -10px;
+}
+
+.ornament {
+  color: var(--pink-dark);
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+.hero-label {
+  font-family: Georgia, serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--muted);
+}
+
+.hero h1 {
+  font-family: Georgia, serif;
+  font-weight: normal;
+  font-size: clamp(56px, 10vw, 100px);
+  letter-spacing: 4px;
+  line-height: 1.3;
+  color: var(--text);
+  margin: 25px 0;
+}
+
+.hero-line {
+  width: 75px;
+  height: 1px;
+  background: var(--pink);
+  margin: 24px auto;
+}
+
+.hero-name {
+  font-family: Georgia, serif;
+  font-size: 19px;
+  letter-spacing: 3px;
+}
+
+.hero-message {
+  margin-top: 40px;
+  line-height: 2.4;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.hero-ribbon {
+  margin-top: 30px;
+  font-size: 30px;
+  color: var(--pink-dark);
+}
+
+.hero-bottom {
+  margin-top: 35px;
+  font-family: Georgia, serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+
+/* =================================
+   04. COMMON SECTIONS
+================================= */
+
+.section {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px 40px 100px;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.section-number {
+  color: var(--pink-dark);
+  font-family: Georgia, serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.section-heading h2 {
+  font-family: Georgia, serif;
+  font-size: 46px;
+  font-weight: normal;
+  letter-spacing: 2px;
+  margin: 8px 0;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.section-heading::after {
+  content: "";
+  display: block;
+  width: 45px;
+  height: 1px;
+  background: var(--pink);
+  margin: 25px auto 0;
+}
+
+.section-intro {
+  text-align: center;
+  margin-bottom: 45px;
+  line-height: 2.2;
+}
+
+
+/* =================================
+   05. ABOUT ME
+================================= */
+
+.about-layout {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 65px;
+  align-items: start;
+  max-width: 850px;
+  margin: auto;
+}
+
+.profile-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 120px 120px 12px 12px;
+  border: 7px solid var(--pink-light);
+}
+
+.small-label {
+  font-family: Georgia, serif;
+  letter-spacing: 2px;
+  color: var(--pink-dark);
+  font-size: 11px;
+}
+
+.about-text h3 {
+  font-size: 24px;
+  font-weight: normal;
+  letter-spacing: 3px;
+  margin-bottom: 0;
+}
+
+.english-name {
+  font-family: Georgia, serif;
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 28px;
+}
+
+.about-text > p:not(.small-label):not(.english-name) {
+  margin-bottom: 18px;
+}
+
+.sub-heading {
+  text-align: center;
+  margin: 80px 0 35px;
+}
+
+.sub-heading h3 {
+  font-family: Georgia, serif;
+  font-weight: normal;
+  font-size: 28px;
+  margin-bottom: 0;
+}
+
+.sub-heading span {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 2px;
+}
+
+.timeline {
+  max-width: 700px;
+  margin: auto;
+  padding-left: 22px;
+  border-left: 1px solid var(--pink);
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 30px 30px;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -28px;
+  top: 7px;
+  width: 11px;
+  height: 11px;
+  background: var(--pink);
+  border: 2px solid var(--white);
+  border-radius: 50%;
+}
+
+.timeline-label {
+  font-family: Georgia, serif;
+  color: var(--pink-dark);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  margin-bottom: 3px;
+}
+
+.timeline-item h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.timeline-item p:last-child {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+
+/* =================================
+   06. SKILLS
+================================= */
+
+.section-pink {
+  max-width: none;
+  background: var(--pink-light);
+}
+
+.section-pink > * {
+  max-width: 1020px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.skill-card {
+  padding: 30px 24px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.skill-category {
+  font-family: Georgia, serif;
+  font-size: 21px;
+  color: var(--pink-dark);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.stars {
+  color: var(--pink-dark);
+  letter-spacing: 3px;
+  font-size: 17px;
+}
+
+.skill-note {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 20px;
+}
+
+.skill-caption {
+  text-align: right;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 15px;
+}
+
+
+/* =================================
+   07. WORKS
+================================= */
+
+.works-section {
+  max-width: 1200px;
+}
+
+.work-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.filter-btn {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  padding: 8px 20px;
+  color: var(--text);
+  font-family: Georgia, serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--pink);
+  color: var(--white);
+  border-color: var(--pink);
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px 25px;
+}
+
+.work-card {
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.work-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(130,100,110,0.08);
+}
+
+.work-card.hidden {
+  display: none;
+}
+
+.work-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.image-placeholder {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, #fffafb, #f7eaf0);
+}
+
+.image-placeholder img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-placeholder span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pink-dark);
+  font-family: Georgia, serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 15px;
+}
+
+.image-placeholder img:not([src]) {
+  display: none;
+}
+
+.work-info {
+  padding: 20px;
+}
+
+.work-category {
+  font-family: Georgia, serif;
+  color: var(--pink-dark);
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+}
+
+.work-info h3 {
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.work-info > p:last-child {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+
+/* =================================
+   08. CONTACT
+================================= */
+
+.contact-section {
+  max-width: none;
+  background: var(--cream);
+  text-align: center;
+}
+
+.contact-content {
+  max-width: 600px;
+  margin: auto;
+  padding: 35px;
+  border: 1px solid var(--line);
+}
+
+.contact-decoration {
+  color: var(--pink-dark);
+  font-size: 30px;
+}
+
+.contact-content h3 {
+  font-family: Georgia, serif;
+  font-weight: normal;
+  font-size: 25px;
+}
+
+.contact-name {
+  font-family: Georgia, serif;
+  color: var(--pink-dark);
+  letter-spacing: 2px;
+  margin-top: 30px;
+}
+
+
+/* =================================
+   09. FOOTER
+================================= */
+
+.site-footer {
+  padding: 25px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  font-family: Georgia, serif;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+
+/* =================================
+   10. RESPONSIVE
+================================= */
+
+@media screen and (max-width: 850px) {
+
+  .about-layout {
+    grid-template-columns: 180px 1fr;
+    gap: 35px;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .works-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+
+  :root {
+    --header-height: 65px;
+  }
+
+  .header-inner {
+    padding: 15px 20px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 23px;
+    height: 2px;
+    background: var(--pink-dark);
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 13px 25px;
+    border-bottom: 1px solid var(--pink-light);
+  }
+
+  .hero {
+    padding: 45px 20px;
+    min-height: 80vh;
+  }
+
+  .hero-content {
+    padding: 65px 15px;
+  }
+
+  .hero-label {
+    letter-spacing: 2px;
+    font-size: 9px;
+  }
+
+  .hero h1 {
+    font-size: 55px;
+  }
+
+  .section {
+    padding: 30px 22px 70px;
+  }
+
+  .section-heading h2 {
+    font-size: 37px;
+  }
+
+  .about-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .profile-photo {
+    max-width: 165px;
+    margin: auto;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .works-grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin: auto;
+  }
+
+  .site-footer {
+    padding: 20px;
+  }
+
+}
+
+
+/* =================================
+   11. A4 PRINT / PDF
+================================= */
+
+@page {
+  size: A4 portrait;
+  margin: 15mm;
+}
+
+@media print {
+
+  html {
+    scroll-behavior: auto;
+    scroll-padding-top: 0;
+  }
+
+  body {
+    font-size: 10pt;
+    line-height: 1.65;
+    background: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .site-header,
+  .site-footer,
+  .work-filters {
+    display: none !important;
+  }
+
+  #home,
+  #about,
+  #skills,
+  #works,
+  #contact {
+    scroll-margin-top: 0;
+  }
+
+  .hero {
+    min-height: 0;
+    height: 267mm;
+    padding: 12mm;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .hero-content {
+    padding: 22mm 10mm;
+  }
+
+  .hero h1 {
+    font-size: 56pt;
+  }
+
+  .section {
+    max-width: none;
+    padding: 10mm 0;
+    margin: 0;
+  }
+
+  .section-heading {
+    margin-bottom: 10mm;
+  }
+
+  .section-heading h2 {
+    font-size: 30pt;
+  }
+
+  #about,
+  #skills,
+  #works,
+  #contact {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  .about-layout {
+    grid-template-columns: 42mm 1fr;
+    gap: 9mm;
+  }
+
+  .about-text p {
+    font-size: 9pt;
+  }
+
+  .sub-heading {
+    margin-top: 14mm;
+  }
+
+  .timeline-item {
+    padding-bottom: 5mm;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+  }
+
+  .skill-card {
+    padding: 6mm;
+  }
+
+  .works-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 7mm 5mm;
+  }
+
+  .work-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .work-card.hidden {
+    display: block !important;
+  }
+
+  .work-image {
+    aspect-ratio: 4 / 3;
+  }
+
+  .work-info {
+    padding: 4mm;
+  }
+
+  .work-info h3 {
+    font-size: 12pt;
+  }
+
+  .section-pink {
+    background: var(--pink-light);
+  }
+
+  .contact-section {
+    background: white;
+  }
+
+  .contact-content {
+    margin-top: 25mm;
+  }
+
+  .print-page {
+    break-inside: auto;
+  }
+
+}
+
+
+/* =================================
+   WORK IMAGE DISPLAY
+================================= */
+
+/* 一覧では画像全体を表示 */
+.work-image img {
+  object-fit: contain;
+  cursor: zoom-in;
+  background: #fffafb;
+}
+
+/* 画像にマウスを重ねたとき */
+.work-image img:hover {
+  opacity: 0.85;
+  transition: opacity 0.3s;
+}
+
+.work-image img:focus-visible {
+  outline: 3px solid var(--pink-dark);
+  outline-offset: -3px;
+}
+
+
+/* =================================
+   IMAGE MODAL
+================================= */
+
+.image-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(45, 35, 40, 0.88);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 65px;
+}
+
+.image-modal.open {
+  display: flex;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-image {
+  display: block;
+  max-width: 100%;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0 5px 35px rgba(0,0,0,0.2);
+}
+
+.modal-caption {
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.modal-counter {
+  color: #ddd0d5;
+  font-family: Georgia, serif;
+  font-size: 12px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 36px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.modal-prev,
+.modal-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 38px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.modal-prev {
+  left: 12px;
+}
+
+.modal-next {
+  right: 12px;
+}
+
+.modal-close:hover,
+.modal-prev:hover,
+.modal-next:hover {
+  color: var(--pink);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+
+/* =================================
+   MOBILE MODAL
+================================= */
+
+@media screen and (max-width: 600px) {
+
+  .image-modal {
+    padding: 50px 35px;
+  }
+
+  .modal-image {
+    max-height: 75vh;
+  }
+
+  .modal-prev,
+  .modal-next {
+    font-size: 26px;
+    padding: 4px;
+  }
+
+  .modal-prev {
+    left: 3px;
+  }
+
+  .modal-next {
+    right: 3px;
+  }
+
+  .modal-close {
+    top: 12px;
+    right: 15px;
+  }
+
+}
+
+
+/* =================================
+   PRINT / PDF
+================================= */
+
+@media print {
+
+  .image-modal {
+    display: none !important;
+  }
+
+  .work-image img {
+    object-fit: contain;
+    background: white;
+  }
+
+}
+
+
+/* =================================
+   WORK IMAGE / A4 PORTRAIT
+================================= */
+
+/* 作品画像の枠をA4縦の比率に統一 */
+.work-image {
+  width: 100%;
+  aspect-ratio: 210 / 297;
+  overflow: hidden;
+}
+
+
+/* =================================
+   WORK IMAGE / A4 LANDSCAPE
+================================= */
+
+/* 作品画像の枠をA4横に統一 */
+.work-image {
+  width: 100%;
+  aspect-ratio: 297 / 210;
+  overflow: hidden;
+}
+
+/* 画像を切り抜かずに全体表示 */
+.work-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* PDF・印刷時 */
+@media print {
+  .work-image {
+    aspect-ratio: 297 / 210;
+  }
+
+  .work-image img {
+    object-fit: contain;
+  }
+}
+
+
+/* =================================
+   WORK IMAGE / AUTO FIT
+================================= */
+
+/* A4横の画像枠 */
+.work-image {
+  width: 100%;
+  aspect-ratio: 297 / 210;
+  overflow: hidden;
+}
+
+/* 通常は画像全体を表示 */
+.work-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* 横長画像だけ中央を基準に余白を埋める */
+.work-image img.landscape {
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* PDFでも同じ表示 */
+@media print {
+  .work-image {
+    aspect-ratio: 297 / 210;
+  }
+}
+
+/* 通常のとき（下線あり・青文字） */
+.pdf-link {
+  color: #0066cc;
+  text-decoration: underline;
+  transition: all 0.3s ease; /* 変化をふわっと滑らかにする効果 */
+}
+
+/* マウスオーバーしたとき（下線が消えて、色がオレンジに変わる） */
+.pdf-link:hover {
+  color: #ff9900;
+  text-decoration: none; /* 下線を消す */
+  opacity: 0.8;          /* 少し透明にする */
+}
+
+
+/* 動画：作品画像と同じ枠内に、縦横比を保って全体表示 */
+.work-image video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: #fffafb;
+}
+
+/* 動画・画像上の作品番号表示がクリックを妨げないようにする */
+.image-placeholder span {
+  pointer-events: none;
+}
