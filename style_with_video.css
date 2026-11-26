@@ -932,7 +932,7 @@ body.modal-open {
 
 @page {
   size: A4 portrait;
-  margin: 10mm;
+  margin: 12mm 10mm;
 }
 
 @media print {
@@ -948,8 +948,8 @@ body.modal-open {
     background-color: #ffffff !important;
     background-image: none !important;
     color: var(--text);
-    font-size: 8.5pt;
-    line-height: 1.45;
+    font-size: 8pt;
+    line-height: 1.4;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -968,7 +968,7 @@ body.modal-open {
     display: block !important;
     min-height: 0 !important;
     height: auto !important;
-    padding: 20mm 10mm !important;
+    padding: 14mm 8mm !important;
     background-color: #ffffff !important;
     background-image: none !important;
     break-after: page !important;
@@ -992,7 +992,7 @@ body.modal-open {
   .section {
     display: block !important;
     max-width: none !important;
-    padding: 4mm 0 !important;
+    padding: 2mm 0 !important;
     margin: 0 !important;
     background-color: #ffffff !important;
     background-image: none !important;
@@ -1006,22 +1006,35 @@ body.modal-open {
     page-break-before: always !important;
   }
 
+  #about,
+  #skills,
+  #contact {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
   .section-heading {
-    margin-bottom: 6mm;
+    margin-bottom: 4mm;
   }
 
   .section-heading h2 {
-    font-size: 28pt;
-    margin: 2mm 0;
+    font-size: 20pt;
+    margin: 1mm 0;
+  }
+
+  .section-heading p {
+    font-size: 8pt;
+    margin-bottom: 0;
   }
 
   .section-heading::after {
-    margin: 3mm auto 0;
+    margin: 2mm auto 0;
   }
 
   .section-intro {
-    margin-bottom: 5mm;
-    line-height: 1.6;
+    font-size: 8pt;
+    margin-bottom: 3.5mm;
+    line-height: 1.5;
   }
 
   .section-heading,
@@ -1041,30 +1054,47 @@ body.modal-open {
 
   .about-layout {
     display: grid;
-    grid-template-columns: 36mm 1fr;
-    gap: 6mm;
+    grid-template-columns: 32mm 1fr;
+    gap: 5mm;
     max-width: none;
   }
 
   .profile-photo {
-    max-width: 36mm;
+    max-width: 32mm;
     border-width: 3px;
   }
 
+  .small-label {
+    font-size: 7.5pt;
+    margin-bottom: 1mm;
+  }
+
+  .about-text h3 {
+    font-size: 13pt;
+    margin-bottom: 0.5mm;
+  }
+
   .english-name {
-    margin-bottom: 4mm;
+    font-size: 8pt;
+    margin-bottom: 2.5mm;
   }
 
   .about-text > p:not(.small-label):not(.english-name) {
-    margin-bottom: 3mm;
+    font-size: 8pt;
+    line-height: 1.45;
+    margin-bottom: 2mm;
   }
 
   .sub-heading {
-    margin: 7mm 0 4mm;
+    margin: 5mm 0 3mm;
   }
 
   .sub-heading h3 {
-    font-size: 16pt;
+    font-size: 13pt;
+  }
+
+  .sub-heading span {
+    font-size: 7.5pt;
   }
 
   .timeline {
@@ -1072,40 +1102,77 @@ body.modal-open {
   }
 
   .timeline-item {
-    padding: 0 0 4mm 5mm;
+    padding: 0 0 3mm 4mm;
   }
 
   .timeline-dot {
     left: -6.5mm;
+    top: 1.5mm;
+    width: 2.5mm;
+    height: 2.5mm;
+  }
+
+  .timeline-label {
+    font-size: 7.5pt;
+    margin-bottom: 0.5mm;
+  }
+
+  .timeline-item h4 {
+    font-size: 9.5pt;
+    margin-bottom: 1mm;
+  }
+
+  .timeline-item p:last-child {
+    font-size: 8pt;
+    line-height: 1.4;
+    margin-bottom: 0;
   }
 
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 4mm;
+    gap: 3.5mm;
   }
 
   .skill-card {
-    padding: 4mm;
+    padding: 3.5mm 4mm;
   }
 
-  /* 作品一覧：指定されたページ分割ごとに2列グリッドで配置 */
+  .skill-category {
+    font-size: 11pt;
+    padding-bottom: 1.5mm;
+    margin-bottom: 2.5mm;
+  }
+
+  .skill-item {
+    font-size: 8.5pt;
+    gap: 1px;
+    margin-bottom: 2mm;
+  }
+
+  .skill-item:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .stars {
+    font-size: 9.5pt;
+    letter-spacing: 2px;
+  }
+
+  .skill-note {
+    font-size: 7.5pt;
+    line-height: 1.4;
+    margin-top: 2mm;
+    margin-bottom: 0;
+  }
+
+  /* 作品一覧：指定されたページ分割ごとに2列行で配置し、改ページ跨ぎを防止 */
   .works-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5mm 6mm;
-    align-items: stretch;
-  }
-
-  .works-grid.has-print-groups {
     display: block !important;
   }
 
   .print-page-group {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5mm 6mm;
-    align-items: stretch;
+    display: block !important;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
@@ -1115,12 +1182,25 @@ body.modal-open {
     page-break-before: always !important;
   }
 
+  .print-row {
+    display: block !important;
+    font-size: 0 !important;
+    margin-bottom: 4mm !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .print-row:last-child {
+    margin-bottom: 0 !important;
+  }
+
   .work-card,
   .work-card.hidden {
-    display: flex !important;
-    flex-direction: column;
-    width: 100%;
+    display: inline-block !important;
+    vertical-align: top !important;
+    width: calc(50% - 2.5mm) !important;
     margin: 0 !important;
+    font-size: 8pt;
     background-color: #ffffff !important;
     border: 1px solid var(--line);
     border-radius: 4px;
@@ -1128,20 +1208,27 @@ body.modal-open {
     page-break-inside: avoid !important;
   }
 
+  .print-row .work-card:first-child {
+    margin-right: 5mm !important;
+  }
+
+  .print-row .work-card:last-child {
+    margin-right: 0 !important;
+  }
+
   /* 作品画像が見切れず、2列で上下左右の基準が揃う設定 */
   .work-image {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    display: block !important;
     width: 100% !important;
-    height: 54mm !important;
+    height: 45mm !important;
+    line-height: 40mm !important;
     aspect-ratio: auto !important;
     overflow: hidden !important;
     background-color: #fffafb !important;
     background-image: none !important;
     border-bottom: 1px solid var(--line);
     padding: 2.5mm !important;
-    text-align: center;
+    text-align: center !important;
   }
 
   .image-placeholder span,
@@ -1152,11 +1239,12 @@ body.modal-open {
   .work-image img,
   .work-image img.landscape,
   .work-image video {
-    display: block !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
     width: auto !important;
     height: auto !important;
     max-width: 100% !important;
-    max-height: 49mm !important;
+    max-height: 40mm !important;
     margin: 0 auto !important;
     object-fit: contain !important;
     background-color: transparent !important;
@@ -1165,24 +1253,25 @@ body.modal-open {
 
   .work-info {
     display: block !important;
-    padding: 2.5mm 3mm;
+    padding: 2mm 2.5mm;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
 
   .work-category {
-    font-size: 6.5pt;
+    font-size: 6pt;
     margin-bottom: 1px;
   }
 
   .work-info h3 {
-    font-size: 9pt;
-    margin-bottom: 2px;
+    font-size: 8.5pt;
+    margin-bottom: 1.5px;
   }
 
   .work-info > p:last-child {
-    font-size: 7.2pt;
-    line-height: 1.4;
+    font-size: 7pt;
+    line-height: 1.35;
+    margin-bottom: 0;
   }
 
   .contact-content {
