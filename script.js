@@ -142,25 +142,73 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =================================
-   5. 印刷前後のジャンル改ページ制御
+   5. 印刷前後のページ分割・2列配置制御
 ================================= */
-window.addEventListener("beforeprint", () => {
-  const cards = document.querySelectorAll(".works-grid .work-card");
-  let prevCategory = null;
+let originalPrintOrder = [];
 
-  cards.forEach((card, index) => {
-    const currentCategory = card.dataset.category;
-    if (index > 0 && currentCategory && currentCategory !== prevCategory) {
-      card.classList.add("category-break");
-    } else {
-      card.classList.remove("category-break");
+function preparePrintLayout() {
+  const worksGrid = document.querySelector(".works-grid");
+  if (!worksGrid || worksGrid.classList.contains("has-print-groups")) return;
+
+  const cards = Array.from(worksGrid.querySelectorAll(".work-card"));
+  originalPrintOrder = cards;
+
+  const groupOrder = [];
+  const groupsMap = new Map();
+
+  cards.forEach((card) => {
+    const groupKey = card.dataset.printGroup || card.dataset.category || "other";
+    if (!groupsMap.has(groupKey)) {
+      groupsMap.set(groupKey, []);
+      groupOrder.push(groupKey);
     }
-    prevCategory = currentCategory;
+    groupsMap.get(groupKey).push(card);
   });
-});
 
-window.addEventListener("afterprint", () => {
-  document.querySelectorAll(".work-card.category-break").forEach((card) => {
-    card.classList.remove("category-break");
+  worksGrid.classList.add("has-print-groups");
+  groupOrder.forEach((groupKey) => {
+    const pageGroup = document.createElement("div");
+    pageGroup.className = "print-page-group";
+    pageGroup.dataset.printGroup = groupKey;
+    groupsMap.get(groupKey).forEach((card) => {
+      pageGroup.appendChild(card);
+    });
+    worksGrid.appendChild(pageGroup);
   });
-});
+}
+
+function restorePrintLayout() {
+  const worksGrid = document.querySelector(".works-grid");
+  if (!worksGrid || !worksGrid.classList.contains("has-print-groups")) return;
+
+  originalPrintOrder.forEach((card) => {
+    worksGrid.appendChild(card);
+  });
+
+  worksGrid.querySelectorAll(".print-page-group").forEach((groupEl) => {
+    groupEl.remove();
+  });
+
+  worksGrid.classList.remove("has-print-groups");
+  originalPrintOrder = [];
+}
+
+window.addEventListener("beforeprint", preparePrintLayout);
+window.addEventListener("afterprint", restorePrintLayout);
+
+if (window.matchMedia) {
+  const printMediaQuery = window.matchMedia("print");
+  const handlePrintMediaChange = (e) => {
+    if (e.matches) {
+      preparePrintLayout();
+    } else {
+      restorePrintLayout();
+    }
+  };
+
+  if (typeof printMediaQuery.addEventListener === "function") {
+    printMediaQuery.addEventListener("change", handlePrintMediaChange);
+  } else if (typeof printMediaQuery.addListener === "function") {
+    printMediaQuery.addListener(handlePrintMediaChange);
+  }
+}
