@@ -1008,7 +1008,7 @@ body.modal-open {
     display: block !important;
     min-height: 0 !important;
     height: auto !important;
-    padding: 30mm 8mm 14mm !important;
+    padding: 18mm 8mm 14mm !important;
     background-color: #ffffff !important;
     background-image: none !important;
     break-after: page !important;
@@ -1061,7 +1061,11 @@ body.modal-open {
     display: block !important;
     position: static !important;
     visibility: visible !important;
-    padding-top: 16mm !important;
+    padding-top: 35mm !important;
+  }
+
+  #contact .section-heading {
+    margin-bottom: 0 !important;
   }
 
   .contact-mail {
@@ -1348,7 +1352,7 @@ body.modal-open {
   }
 
   .contact-content {
-    margin-top: 8mm;
-    padding: 8mm;
+    margin-top: 31mm !important;
+    padding: 10mm 8mm;
   }
 }
