@@ -948,12 +948,12 @@ body.modal-open {
 
 
 /* =================================
-12. A4 PORTRAIT PRINT / PDF
+12. A4 LANDSCAPE PRINT / PDF (見開きレイアウト)
 ================================= */
 
 @page {
-  size: A4 portrait;
-  margin: 18mm 10mm 12mm;
+  size: A4 landscape;
+  margin: 9mm 12mm 11mm;
 
   @bottom-center {
     content: "✿  " counter(page) " / " counter(pages) "  ✿";
@@ -962,8 +962,8 @@ body.modal-open {
     letter-spacing: 2px;
     color: #bd879b;
     border-top: 1px solid #eadfe2;
-    padding: 2mm 6mm 0;
-    margin-bottom: 2mm;
+    padding: 1.5mm 6mm 0;
+    margin-bottom: 1.5mm;
     vertical-align: top;
   }
 }
@@ -988,8 +988,8 @@ body.modal-open {
     background-color: #ffffff !important;
     background-image: none !important;
     color: var(--text);
-    font-size: 9pt;
-    line-height: 1.5;
+    font-size: 8.5pt;
+    line-height: 1.45;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -1003,12 +1003,12 @@ body.modal-open {
     display: none !important;
   }
 
-  /* 表紙：紙面の中央にゆったり配置 */
+  /* 1. 表紙：単独で1枚 */
   .hero {
     display: block !important;
     min-height: 0 !important;
     height: auto !important;
-    padding: 28mm 8mm 0 !important;
+    padding: 12mm 16mm 0 !important;
     background-color: #ffffff !important;
     background-image: none !important;
     break-after: page !important;
@@ -1018,27 +1018,42 @@ body.modal-open {
   .hero-content {
     display: block !important;
     width: 100%;
-    padding: 26mm 14mm;
+    max-width: 220mm;
+    margin: 0 auto;
+    padding: 16mm 18mm;
     background-color: #ffffff !important;
     background-image: none !important;
     border: 1px solid var(--line);
   }
 
   .hero h1 {
-    font-size: 46pt;
-    margin: 16px 0;
+    font-size: 42pt;
+    margin: 10px 0;
+  }
+
+  .hero-line {
+    margin: 14px auto;
   }
 
   .hero-message {
-    margin-top: 22px;
-    font-size: 10pt;
-    line-height: 2.1;
+    margin-top: 16px;
+    font-size: 9.5pt;
+    line-height: 2;
+  }
+
+  .hero-ribbon {
+    margin-top: 14px;
+    font-size: 24pt;
+  }
+
+  .hero-bottom {
+    margin-top: 16px;
   }
 
   .section {
     display: block !important;
     max-width: none !important;
-    padding: 8mm 0 2mm !important;
+    padding: 4mm 0 2mm !important;
     margin: 0 !important;
     background-color: #ffffff !important;
     background-image: none !important;
@@ -1059,60 +1074,28 @@ body.modal-open {
     page-break-inside: avoid !important;
   }
 
-  #about {
-    padding-top: 14mm !important;
-  }
-
-  #skills {
-    padding-top: 20mm !important;
-  }
-
-  #works {
-    padding-top: 22mm !important;
-  }
-
-  #contact {
-    display: block !important;
-    position: static !important;
-    visibility: visible !important;
-    padding-top: 38mm !important;
-  }
-
-  #contact .section-heading {
-    margin-bottom: 0 !important;
-  }
-
-  .contact-mail {
-    margin-top: 2mm;
-    border-bottom: none;
-  }
-
   .section-heading {
-    margin-bottom: 7mm;
+    margin-bottom: 5mm;
   }
 
   .section-heading h2 {
-    font-size: 22pt;
-    margin: 1.5mm 0;
+    font-size: 19pt;
+    margin: 1mm 0;
   }
 
   .section-heading p {
-    font-size: 8.5pt;
+    font-size: 8pt;
     margin-bottom: 0;
   }
 
   .section-heading::after {
-    margin: 2.5mm auto 0;
+    margin: 2mm auto 0;
   }
 
   .section-intro {
-    font-size: 9pt;
-    margin-bottom: 6mm;
-    line-height: 1.6;
-  }
-
-  #works .section-intro {
-    margin-bottom: 10mm !important;
+    font-size: 8.5pt;
+    margin-bottom: 4mm;
+    line-height: 1.5;
   }
 
   .section-heading,
@@ -1122,118 +1105,146 @@ body.modal-open {
     page-break-after: avoid !important;
   }
 
-  .about-layout,
-  .timeline,
-  .skills-grid,
-  .skill-card,
-  .contact-content {
+  /* 2. プロフィールと経歴：見開きイメージ（左＝プロフィール、右＝経歴） */
+  #about {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto auto 1fr !important;
+    column-gap: 16mm !important;
+    row-gap: 0 !important;
+    align-items: start !important;
+    padding-top: 6mm !important;
+  }
+
+  #about .section-heading {
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    margin-bottom: 7mm !important;
+  }
+
+  #about .about-layout {
+    grid-column: 1 !important;
+    grid-row: 2 / 4 !important;
+    display: grid !important;
+    grid-template-columns: 35mm 1fr !important;
+    gap: 5mm !important;
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
 
-  /* プロフィールと経歴：横幅を絞って左右中央に配置 */
-  .about-layout {
-    display: grid;
-    grid-template-columns: 40mm 1fr;
-    gap: 7mm;
-    max-width: 155mm;
-    margin: 0 auto;
-  }
-
   .profile-photo {
-    max-width: 40mm;
+    max-width: 35mm;
     border-width: 4px;
   }
 
   .small-label {
-    font-size: 8pt;
-    margin-bottom: 1mm;
+    font-size: 7.5pt;
+    margin-bottom: 0.5mm;
   }
 
   .about-text h3 {
-    font-size: 14.5pt;
+    font-size: 13pt;
     margin-bottom: 0.5mm;
   }
 
   .english-name {
-    font-size: 8.5pt;
-    margin-bottom: 3mm;
-  }
-
-  .about-text > p:not(.small-label):not(.english-name) {
-    font-size: 9pt;
-    line-height: 1.55;
+    font-size: 8pt;
     margin-bottom: 2.5mm;
   }
 
-  .sub-heading {
-    margin: 9mm 0 5mm;
+  .about-text > p:not(.small-label):not(.english-name) {
+    font-size: 8.5pt;
+    line-height: 1.5;
+    margin-bottom: 2mm;
+  }
+
+  #about .sub-heading {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    margin: 0 0 3.5mm !important;
+    text-align: left !important;
   }
 
   .sub-heading h3 {
-    font-size: 14pt;
+    font-size: 13pt;
   }
 
   .sub-heading span {
-    font-size: 8pt;
+    font-size: 7.5pt;
   }
 
-  .timeline {
-    max-width: 145mm;
-    margin: 0 auto;
-    padding-left: 6mm;
+  #about .timeline {
+    grid-column: 2 !important;
+    grid-row: 3 !important;
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding-left: 5mm;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 
   .timeline-item {
-    padding: 0 0 4.5mm 5mm;
+    padding: 0 0 3.5mm 4mm;
   }
 
   .timeline-dot {
-    left: -7.5mm;
-    top: 1.8mm;
-    width: 3mm;
-    height: 3mm;
+    left: -6.5mm;
+    top: 1.5mm;
+    width: 2.5mm;
+    height: 2.5mm;
   }
 
   .timeline-label {
-    font-size: 8pt;
+    font-size: 7.5pt;
     margin-bottom: 0.5mm;
   }
 
   .timeline-item h4 {
-    font-size: 10pt;
-    margin-bottom: 1mm;
+    font-size: 9.5pt;
+    margin-bottom: 0.5mm;
   }
 
   .timeline-item p:last-child {
-    font-size: 8.8pt;
-    line-height: 1.45;
+    font-size: 8pt;
+    line-height: 1.4;
     margin-bottom: 0;
   }
 
-  /* スキル：カードと文字を大きくして余白を削減 */
+  /* 3. スキル：3列でA4横向き1枚に収める */
+  #skills {
+    padding-top: 8mm !important;
+  }
+
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5mm;
-    max-width: 170mm;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6mm;
+    max-width: none;
     margin: 0 auto;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 
   .skill-card {
-    padding: 5.5mm 6mm;
+    padding: 4.5mm 5mm;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 
   .skill-category {
-    font-size: 12pt;
-    padding-bottom: 2mm;
-    margin-bottom: 3mm;
+    font-size: 11.5pt;
+    padding-bottom: 1.5mm;
+    margin-bottom: 2.5mm;
   }
 
   .skill-item {
-    font-size: 9.5pt;
-    gap: 1.5px;
-    margin-bottom: 2.5mm;
+    font-size: 8.8pt;
+    gap: 1px;
+    margin-bottom: 2mm;
   }
 
   .skill-item:last-of-type {
@@ -1241,60 +1252,67 @@ body.modal-open {
   }
 
   .stars {
-    font-size: 10.5pt;
+    font-size: 9.5pt;
     letter-spacing: 2px;
   }
 
   .skill-note {
-    font-size: 8.5pt;
-    line-height: 1.45;
-    margin-top: 3mm;
+    font-size: 7.8pt;
+    line-height: 1.4;
+    margin-top: 2.5mm;
     margin-bottom: 0;
   }
 
-  /* 作品一覧：カードを大きくし、ページ内の無駄な隙間を解消 */
+  .skill-caption {
+    font-size: 7.5pt;
+    margin-top: 3mm;
+  }
+
+  /* 4. 作品一覧：A4横向きに4つ配置（左上 → 右上 → 左下 → 右下） */
+  #works {
+    padding-top: 1mm !important;
+  }
+
+  #works .section-heading {
+    margin-bottom: 2mm !important;
+  }
+
+  #works .section-heading h2 {
+    font-size: 17pt;
+    margin: 0.5mm 0;
+  }
+
+  #works .section-heading::after {
+    margin: 1.5mm auto 0;
+  }
+
+  #works .section-intro {
+    font-size: 8.2pt;
+    line-height: 1.4;
+    margin-bottom: 3mm !important;
+  }
+
   .works-grid {
     display: block !important;
-  }
-
-  .print-page-group {
-    display: block !important;
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-  }
-
-  #works .works-grid .print-page-group:first-child {
-    margin-top: 0 !important;
-  }
-
-  .print-page-group + .print-page-group {
-    break-before: page !important;
-    page-break-before: always !important;
-    padding-top: 14mm !important;
-  }
-
-  .print-row {
-    display: block !important;
     font-size: 0 !important;
-    margin-bottom: 6mm !important;
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
+    margin: 0 -3mm !important;
   }
 
-  .print-row:last-child {
-    margin-bottom: 0 !important;
+  .print-page-group,
+  .print-row {
+    display: contents !important;
   }
 
   .work-card,
   .work-card.hidden {
     display: inline-block !important;
     vertical-align: top !important;
-    width: calc(50% - 3mm) !important;
-    height: 105mm !important;
+    width: calc(50% - 6mm) !important;
+    height: 76mm !important;
     overflow: hidden !important;
     box-sizing: border-box !important;
-    margin: 0 !important;
-    font-size: 9pt;
+    margin: 0 3mm 3.5mm !important;
+    font-size: 8.5pt;
     background-color: #ffffff !important;
     border: 1px solid var(--line);
     border-radius: 4px;
@@ -1302,20 +1320,12 @@ body.modal-open {
     page-break-inside: avoid !important;
   }
 
-  .print-row .work-card:first-child {
-    margin-right: 5mm !important;
-  }
-
-  .print-row .work-card:last-child {
-    margin-right: 0 !important;
-  }
-
-  /* 作品画像が見切れず、大きく表示される統一枠 */
+  /* 作品画像枠（見切れ防止・統一サイズ） */
   .work-image {
     display: block !important;
     width: 100% !important;
-    height: 73mm !important;
-    line-height: 69mm !important;
+    height: 49mm !important;
+    line-height: 45mm !important;
     aspect-ratio: auto !important;
     overflow: hidden !important;
     background-color: #fffafb !important;
@@ -1338,7 +1348,7 @@ body.modal-open {
     width: auto !important;
     height: auto !important;
     max-width: 100% !important;
-    max-height: 69mm !important;
+    max-height: 45mm !important;
     margin: 0 auto !important;
     object-fit: contain !important;
     background-color: transparent !important;
@@ -1347,34 +1357,53 @@ body.modal-open {
 
   .work-info {
     display: block !important;
-    height: 31mm !important;
+    height: 26.5mm !important;
     overflow: hidden !important;
-    padding: 2mm 3mm;
+    padding: 1.5mm 3mm;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
 
   .work-category {
-    font-size: 6.8pt;
+    font-size: 6.5pt;
+    line-height: 1.25;
+    margin-bottom: 1px;
+  }
+
+  .work-info h3 {
+    font-size: 8.5pt;
     line-height: 1.25;
     margin-bottom: 1.5px;
   }
 
-  .work-info h3 {
-    font-size: 8.8pt;
-    line-height: 1.3;
-    margin-bottom: 1.5px;
-  }
-
   .work-info > p:last-child {
-    font-size: 7.2pt;
-    line-height: 1.38;
+    font-size: 7pt;
+    line-height: 1.35;
     margin-bottom: 0;
   }
 
+  /* 5. CONTACT：単独で1枚の中央に配置 */
+  #contact {
+    display: block !important;
+    position: static !important;
+    visibility: visible !important;
+    padding-top: 20mm !important;
+  }
+
+  #contact .section-heading {
+    margin-bottom: 0 !important;
+  }
+
+  .contact-mail {
+    margin-top: 2mm;
+    border-bottom: none;
+  }
+
   .contact-content {
-    max-width: 140mm;
-    margin: 14mm auto 0 !important;
-    padding: 14mm 10mm;
+    max-width: 150mm;
+    margin: 8mm auto 0 !important;
+    padding: 12mm 10mm;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 }
