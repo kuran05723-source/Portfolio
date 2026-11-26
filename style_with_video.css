@@ -932,7 +932,7 @@ body.modal-open {
 
 @page {
   size: A4 portrait;
-  margin: 18mm 10mm 16mm;
+  margin: 16mm 10mm 14mm;
 
   @bottom-center {
     content: "✿  " counter(page) " / " counter(pages) "  ✿";
@@ -942,7 +942,7 @@ body.modal-open {
     color: #bd879b;
     border-top: 1px solid #eadfe2;
     padding: 2mm 6mm 0;
-    margin-bottom: 4mm;
+    margin-bottom: 3mm;
     vertical-align: top;
   }
 }
@@ -1025,6 +1025,10 @@ body.modal-open {
     page-break-inside: avoid !important;
   }
 
+  #works {
+    padding-top: 35mm !important;
+  }
+
   #contact {
     display: block !important;
     position: static !important;
@@ -1053,6 +1057,10 @@ body.modal-open {
     font-size: 8pt;
     margin-bottom: 3.5mm;
     line-height: 1.5;
+  }
+
+  #works .section-intro {
+    margin-bottom: 0 !important;
   }
 
   .section-heading,
@@ -1185,7 +1193,7 @@ body.modal-open {
     margin-bottom: 0;
   }
 
-  /* 作品一覧：最初のページは2作品（中央寄り）、以降は4作品（2列×2段）で高さを統一 */
+  /* 作品一覧：1枚目は文字が上段中央・2作品が下段の高さ、以降は4作品（2列×2段） */
   .works-grid {
     display: block !important;
   }
@@ -1197,7 +1205,7 @@ body.modal-open {
   }
 
   #works .works-grid .print-page-group:first-child {
-    margin-top: 46mm !important;
+    margin-top: 32.5mm !important;
   }
 
   .print-page-group + .print-page-group {
@@ -1209,7 +1217,7 @@ body.modal-open {
   .print-row {
     display: block !important;
     font-size: 0 !important;
-    margin-bottom: 4.5mm !important;
+    margin-bottom: 4mm !important;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
@@ -1223,7 +1231,7 @@ body.modal-open {
     display: inline-block !important;
     vertical-align: top !important;
     width: calc(50% - 3mm) !important;
-    height: 96.5mm !important;
+    height: 85.5mm !important;
     overflow: hidden !important;
     box-sizing: border-box !important;
     margin: 0 !important;
@@ -1247,14 +1255,14 @@ body.modal-open {
   .work-image {
     display: block !important;
     width: 100% !important;
-    height: 66mm !important;
-    line-height: 61mm !important;
+    height: 60mm !important;
+    line-height: 56mm !important;
     aspect-ratio: auto !important;
     overflow: hidden !important;
     background-color: #fffafb !important;
     background-image: none !important;
     border-bottom: 1px solid var(--line);
-    padding: 2.5mm !important;
+    padding: 2mm !important;
     text-align: center !important;
   }
 
@@ -1271,7 +1279,7 @@ body.modal-open {
     width: auto !important;
     height: auto !important;
     max-width: 100% !important;
-    max-height: 61mm !important;
+    max-height: 56mm !important;
     margin: 0 auto !important;
     object-fit: contain !important;
     background-color: transparent !important;
@@ -1280,26 +1288,28 @@ body.modal-open {
 
   .work-info {
     display: block !important;
-    height: 30mm !important;
+    height: 25mm !important;
     overflow: hidden !important;
-    padding: 2mm 2.5mm;
+    padding: 1.5mm 2.5mm;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
 
   .work-category {
     font-size: 6pt;
+    line-height: 1.25;
     margin-bottom: 1px;
   }
 
   .work-info h3 {
-    font-size: 8.5pt;
-    margin-bottom: 1.5px;
+    font-size: 8pt;
+    line-height: 1.25;
+    margin-bottom: 1px;
   }
 
   .work-info > p:last-child {
-    font-size: 7pt;
-    line-height: 1.35;
+    font-size: 6.5pt;
+    line-height: 1.32;
     margin-bottom: 0;
   }
 
