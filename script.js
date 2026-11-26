@@ -170,9 +170,18 @@ function preparePrintLayout() {
     const pageGroup = document.createElement("div");
     pageGroup.className = "print-page-group";
     pageGroup.dataset.printGroup = groupKey;
-    groupsMap.get(groupKey).forEach((card) => {
-      pageGroup.appendChild(card);
-    });
+
+    const groupCards = groupsMap.get(groupKey);
+    for (let i = 0; i < groupCards.length; i += 2) {
+      const row = document.createElement("div");
+      row.className = "print-row";
+      row.appendChild(groupCards[i]);
+      if (groupCards[i + 1]) {
+        row.appendChild(groupCards[i + 1]);
+      }
+      pageGroup.appendChild(row);
+    }
+
     worksGrid.appendChild(pageGroup);
   });
 }
