@@ -154,11 +154,15 @@ function preparePrintLayout() {
   originalPrintOrder = cards;
 
   worksGrid.classList.add("has-print-groups");
-  for (let pageStart = 0; pageStart < cards.length; pageStart += 4) {
+  let offset = 0;
+  let isFirstPage = true;
+
+  while (offset < cards.length) {
+    const pageSize = isFirstPage ? 2 : 4;
     const pageGroup = document.createElement("div");
     pageGroup.className = "print-page-group";
 
-    const pageCards = cards.slice(pageStart, pageStart + 4);
+    const pageCards = cards.slice(offset, offset + pageSize);
     for (let i = 0; i < pageCards.length; i += 2) {
       const row = document.createElement("div");
       row.className = "print-row";
@@ -170,6 +174,8 @@ function preparePrintLayout() {
     }
 
     worksGrid.appendChild(pageGroup);
+    offset += pageSize;
+    isFirstPage = false;
   }
 }
 
