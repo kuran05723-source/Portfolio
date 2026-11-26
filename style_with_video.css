@@ -932,7 +932,19 @@ body.modal-open {
 
 @page {
   size: A4 portrait;
-  margin: 18mm 10mm 10mm;
+  margin: 18mm 10mm 16mm;
+
+  @bottom-center {
+    content: "✿  " counter(page) " / " counter(pages) "  ✿";
+    font-family: Georgia, "Hiragino Kaku Gothic ProN", "Yu Gothic", serif;
+    font-size: 8.5pt;
+    letter-spacing: 2px;
+    color: #bd879b;
+    border-top: 1px solid #eadfe2;
+    padding: 2mm 6mm 0;
+    margin-bottom: 4mm;
+    vertical-align: top;
+  }
 }
 
 @media print {
@@ -1013,6 +1025,12 @@ body.modal-open {
     page-break-inside: avoid !important;
   }
 
+  #contact {
+    display: block !important;
+    position: static !important;
+    visibility: visible !important;
+  }
+
   .section-heading {
     margin-bottom: 4mm;
   }
@@ -1038,7 +1056,8 @@ body.modal-open {
   }
 
   .section-heading,
-  .sub-heading {
+  .sub-heading,
+  #works .section-intro {
     break-after: avoid !important;
     page-break-after: avoid !important;
   }
@@ -1166,7 +1185,7 @@ body.modal-open {
     margin-bottom: 0;
   }
 
-  /* 作品一覧：HTML順のまま1ページ4作品（2列×2段）で配置し、改ページ跨ぎを防止 */
+  /* 作品一覧：最初のページは2作品（中央寄り）、以降は4作品（2列×2段）で高さを統一 */
   .works-grid {
     display: block !important;
   }
@@ -1177,9 +1196,14 @@ body.modal-open {
     page-break-inside: avoid !important;
   }
 
+  #works .works-grid .print-page-group:first-child {
+    margin-top: 46mm !important;
+  }
+
   .print-page-group + .print-page-group {
     break-before: page !important;
     page-break-before: always !important;
+    padding-top: 8mm !important;
   }
 
   .print-row {
@@ -1198,7 +1222,10 @@ body.modal-open {
   .work-card.hidden {
     display: inline-block !important;
     vertical-align: top !important;
-    width: calc(50% - 2.5mm) !important;
+    width: calc(50% - 3mm) !important;
+    height: 96.5mm !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
     margin: 0 !important;
     font-size: 8pt;
     background-color: #ffffff !important;
@@ -1253,6 +1280,8 @@ body.modal-open {
 
   .work-info {
     display: block !important;
+    height: 30mm !important;
+    overflow: hidden !important;
     padding: 2mm 2.5mm;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
