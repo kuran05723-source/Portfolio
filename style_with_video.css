@@ -932,7 +932,7 @@ body.modal-open {
 
 @page {
   size: A4 portrait;
-  margin: 12mm 10mm;
+  margin: 18mm 10mm 10mm;
 }
 
 @media print {
@@ -968,7 +968,7 @@ body.modal-open {
     display: block !important;
     min-height: 0 !important;
     height: auto !important;
-    padding: 14mm 8mm !important;
+    padding: 20mm 8mm 14mm !important;
     background-color: #ffffff !important;
     background-image: none !important;
     break-after: page !important;
@@ -992,7 +992,7 @@ body.modal-open {
   .section {
     display: block !important;
     max-width: none !important;
-    padding: 2mm 0 !important;
+    padding: 4mm 0 2mm !important;
     margin: 0 !important;
     background-color: #ffffff !important;
     background-image: none !important;
@@ -1166,7 +1166,7 @@ body.modal-open {
     margin-bottom: 0;
   }
 
-  /* 作品一覧：指定されたページ分割ごとに2列行で配置し、改ページ跨ぎを防止 */
+  /* 作品一覧：HTML順のまま1ページ4作品（2列×2段）で配置し、改ページ跨ぎを防止 */
   .works-grid {
     display: block !important;
   }
@@ -1185,7 +1185,7 @@ body.modal-open {
   .print-row {
     display: block !important;
     font-size: 0 !important;
-    margin-bottom: 4mm !important;
+    margin-bottom: 4.5mm !important;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
@@ -1216,12 +1216,12 @@ body.modal-open {
     margin-right: 0 !important;
   }
 
-  /* 作品画像が見切れず、2列で上下左右の基準が揃う設定 */
+  /* 作品画像が見切れず、縦長画像も大きく表示される統一枠 */
   .work-image {
     display: block !important;
     width: 100% !important;
-    height: 45mm !important;
-    line-height: 40mm !important;
+    height: 66mm !important;
+    line-height: 61mm !important;
     aspect-ratio: auto !important;
     overflow: hidden !important;
     background-color: #fffafb !important;
@@ -1244,7 +1244,7 @@ body.modal-open {
     width: auto !important;
     height: auto !important;
     max-width: 100% !important;
-    max-height: 40mm !important;
+    max-height: 61mm !important;
     margin: 0 auto !important;
     object-fit: contain !important;
     background-color: transparent !important;
