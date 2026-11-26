@@ -953,7 +953,7 @@ body.modal-open {
 
 @page {
   size: A4 portrait;
-  margin: 16mm 10mm 14mm;
+  margin: 21mm 10mm 10mm;
 
   @bottom-center {
     content: "✿  " counter(page) " / " counter(pages) "  ✿";
@@ -963,7 +963,7 @@ body.modal-open {
     color: #bd879b;
     border-top: 1px solid #eadfe2;
     padding: 2mm 6mm 0;
-    margin-bottom: 3mm;
+    margin-bottom: 2mm;
     vertical-align: top;
   }
 }
