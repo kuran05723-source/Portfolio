@@ -312,3 +312,28 @@ document.querySelectorAll(".work-image img")
     }
 
   });
+
+window.addEventListener("beforeprint", () => {
+  const cards = document.querySelectorAll(".works-grid .work-card");
+  let prevCategory = null;
+
+  cards.forEach((card, index) => {
+    const currentCategory = card.dataset.category;
+    if (index > 0 && currentCategory && currentCategory !== prevCategory) {
+      card.classList.add("category-break");
+    } else {
+      card.classList.remove("category-break");
+    }
+    prevCategory = currentCategory;
+  });
+
+  document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
+    img.loading = "eager";
+  });
+});
+
+window.addEventListener("afterprint", () => {
+  document.querySelectorAll(".work-card.category-break").forEach((card) => {
+    card.classList.remove("category-break");
+  });
+});
