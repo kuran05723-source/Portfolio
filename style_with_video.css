@@ -501,7 +501,14 @@ button {
   gap: 35px 25px;
 }
 
+.print-page-group,
+.print-row {
+  display: contents;
+}
+
 .work-card {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   background: var(--white);
   border: 1px solid var(--line);
@@ -637,6 +644,20 @@ button {
   max-width: none;
   background: var(--cream);
   text-align: center;
+}
+
+.contact-mail {
+  display: inline-block;
+  margin-top: 6px;
+  font-family: Georgia, "Hiragino Kaku Gothic ProN", "Yu Gothic", serif;
+  letter-spacing: 1px;
+  border-bottom: 1px solid var(--line);
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.contact-mail:hover {
+  color: var(--pink-dark);
+  border-color: var(--pink-dark);
 }
 
 .contact-content {
@@ -947,6 +968,13 @@ body.modal-open {
   }
 }
 
+@page :first {
+  @bottom-center {
+    content: none;
+    border: none;
+  }
+}
+
 @media print {
   *, *::before, *::after {
     box-shadow: none !important;
@@ -975,12 +1003,12 @@ body.modal-open {
     display: none !important;
   }
 
-  /* 表紙の謎の黒い部分を完全防止 */
+  /* 表紙の謎の黒い部分を完全防止し、縦中央寄りに配置 */
   .hero {
     display: block !important;
     min-height: 0 !important;
     height: auto !important;
-    padding: 20mm 8mm 14mm !important;
+    padding: 46mm 8mm 14mm !important;
     background-color: #ffffff !important;
     background-image: none !important;
     break-after: page !important;
@@ -1033,6 +1061,12 @@ body.modal-open {
     display: block !important;
     position: static !important;
     visibility: visible !important;
+    padding-top: 48mm !important;
+  }
+
+  .contact-mail {
+    margin-top: 1.5mm;
+    border-bottom: none;
   }
 
   .section-heading {
