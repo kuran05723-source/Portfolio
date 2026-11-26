@@ -1187,3 +1187,297 @@ body.modal-open {
 .image-placeholder span {
   pointer-events: none;
 }
+
+/* =================================
+   SCREEN / PRINT IMAGE SEPARATION
+================================= */
+@media screen {
+  .work-image {
+    width: 100%;
+    aspect-ratio: 297 / 210;
+    overflow: hidden;
+  }
+
+  .work-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    background: #fffafb;
+    cursor: zoom-in;
+  }
+
+  .work-image img.landscape {
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+/* =================================
+   A4 LANDSCAPE PRINT / PDF LAYOUT
+================================= */
+@page {
+  size: A4 landscape;
+  margin: 12mm;
+}
+
+@media print {
+  html {
+    scroll-behavior: auto;
+    scroll-padding-top: 0;
+  }
+
+  body {
+    font-size: 9pt;
+    line-height: 1.55;
+    background: #ffffff;
+    color: var(--text);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* 不要なUI・リンク・モーダルを非表示 */
+  .site-header,
+  .menu-toggle,
+  .site-footer,
+  .work-filters,
+  .image-modal,
+  .pdf-link {
+    display: none !important;
+  }
+
+  #home,
+  #about,
+  #skills,
+  #works,
+  #contact {
+    scroll-margin-top: 0;
+  }
+
+  /* 表紙：A4横向き1ページに程よく収める */
+  .hero {
+    min-height: 0;
+    height: 184mm;
+    padding: 10mm 14mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 220mm;
+    padding: 14mm 18mm;
+  }
+
+  .hero h1 {
+    font-size: 40pt;
+    margin: 12px 0;
+  }
+
+  .hero-message {
+    margin-top: 16px;
+    line-height: 1.85;
+  }
+
+  .hero-ribbon {
+    margin-top: 14px;
+    font-size: 20pt;
+  }
+
+  .hero-bottom {
+    margin-top: 14px;
+  }
+
+  /* 共通セクション */
+  .section {
+    max-width: none;
+    padding: 6mm 4mm;
+    margin: 0;
+  }
+
+  .section-heading {
+    margin-bottom: 7mm;
+  }
+
+  .section-heading::after {
+    margin-top: 10px;
+  }
+
+  .section-heading h2 {
+    font-size: 24pt;
+  }
+
+  .section-intro {
+    margin-bottom: 7mm;
+    line-height: 1.65;
+  }
+
+  /* セクションごとに改ページ */
+  #about,
+  #skills,
+  #works,
+  #contact {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  /* About Me */
+  .about-layout {
+    grid-template-columns: 42mm 1fr;
+    gap: 10mm;
+    max-width: none;
+    align-items: start;
+  }
+
+  .profile-photo {
+    max-width: 42mm;
+    border-width: 4px;
+  }
+
+  .about-text p {
+    font-size: 8.5pt;
+    line-height: 1.65;
+    margin-bottom: 6px;
+  }
+
+  .sub-heading {
+    margin: 8mm 0 4mm;
+  }
+
+  .sub-heading h3 {
+    font-size: 17pt;
+  }
+
+  .timeline {
+    max-width: none;
+  }
+
+  .timeline-item {
+    padding-bottom: 4.5mm;
+  }
+
+  .timeline-item p:last-child {
+    font-size: 8.5pt;
+  }
+
+  /* Skills：程よい余白で2列配置 */
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5mm;
+  }
+
+  .skill-card {
+    padding: 5mm 6mm;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .skill-category {
+    font-size: 13pt;
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+  }
+
+  .skill-item {
+    margin-bottom: 6px;
+    font-size: 8.5pt;
+  }
+
+  .stars {
+    font-size: 11pt;
+  }
+
+  /* Works：3列グリッドで程よい間隔 */
+  .works-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6mm 5mm;
+  }
+
+  .work-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .work-card.hidden {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  .work-image {
+    aspect-ratio: 297 / 210;
+    max-height: 36mm;
+    overflow: hidden;
+  }
+
+  .work-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;
+    object-position: center;
+    background: #ffffff !important;
+    cursor: default;
+  }
+
+  /* 動画枠の印刷表示 */
+  .work-image video {
+    display: none !important;
+  }
+
+  .work-card:has(.work-video) .work-image::after {
+    content: "TIMELAPSE VIDEO (Web版にて再生可能)";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: 30mm;
+    font-size: 8pt;
+    color: var(--pink-dark);
+    background: #fffafb;
+    text-align: center;
+    padding: 4mm;
+  }
+
+  .work-info {
+    padding: 3.5mm 4mm;
+  }
+
+  .work-category {
+    font-size: 7pt;
+    margin-bottom: 2px;
+  }
+
+  .work-info h3 {
+    font-size: 10pt;
+    margin-bottom: 3px;
+  }
+
+  .work-info > p:last-child {
+    font-size: 7.5pt;
+    line-height: 1.5;
+  }
+
+  /* 背景色の維持 */
+  .section-pink {
+    background: var(--pink-light);
+  }
+
+  .contact-section {
+    background: var(--cream);
+  }
+
+  .contact-content {
+    margin-top: 8mm;
+    padding: 9mm 12mm;
+  }
+
+  .print-page {
+    break-inside: auto;
+  }
+}
