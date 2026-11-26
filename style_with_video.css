@@ -940,16 +940,22 @@ body.modal-open {
   margin: 10mm;
 }
 
-@media print {
-  html {
-    scroll-behavior: auto;
-    scroll-padding-top: 0;
-  }
+/* =================================
+   A4 PORTRAIT PRINT / PDF
+================================= */
+@page {
+  size: A4 portrait;
+  margin: 10mm;
+}
 
-  body {
-    font-size: 9pt;
-    line-height: 1.5;
-    background: #ffffff;
+@media print {
+  html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 8.5pt;
+    line-height: 1.45;
+    background: #ffffff !important;
     color: var(--text);
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
@@ -965,77 +971,46 @@ body.modal-open {
     display: none !important;
   }
 
-  #home,
-  #about,
-  #skills,
-  #works,
-  #contact {
-    scroll-margin-top: 0;
-  }
-
-  /* 1. 表紙（HOME）：A4横向き1ページに収める */
+  /* 条件3：表紙の謎の黒い部分を防止（radial-gradientを解除して白背景に） */
   .hero {
-    min-height: 0;
-    height: 186mm;
-    padding: 8mm 12mm;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 18mm 8mm !important;
+    background: #ffffff !important;
+    display: block !important;
     break-after: page;
     page-break-after: always;
   }
 
+  .hero::before,
+  .hero::after,
+  .hero-content::before,
+  .hero-content::after {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
   .hero-content {
     width: 100%;
-    max-width: 230mm;
-    padding: 12mm 16mm;
+    max-width: none;
+    padding: 14mm 10mm;
+    background: #ffffff !important;
+    border: 1px solid var(--line);
   }
 
   .hero h1 {
-    font-size: 38pt;
-    margin: 10px 0;
+    font-size: 36pt;
+    margin: 8px 0;
   }
 
-  .hero-message {
-    margin-top: 14px;
-    line-height: 1.8;
-  }
-
-  .hero-ribbon {
-    margin-top: 12px;
-    font-size: 18pt;
-  }
-
-  .hero-bottom {
-    margin-top: 12px;
-  }
-
-  /* 共通セクション */
+  /* 共通セクション：条件2（改ページにコンテンツが被らないようブロック制御） */
   .section {
     max-width: none;
-    padding: 4mm 2mm;
+    padding: 4mm 0;
     margin: 0;
+    display: block !important;
   }
 
-  .section-heading {
-    margin-bottom: 4mm;
-  }
-
-  .section-heading::after {
-    margin-top: 6px;
-  }
-
-  .section-heading h2 {
-    font-size: 20pt;
-  }
-
-  .section-intro {
-    margin-bottom: 4mm;
-    line-height: 1.5;
-  }
-
-  /* メインセクションごとに改ページ */
   #about,
   #skills,
   #works,
@@ -1044,153 +1019,121 @@ body.modal-open {
     page-break-before: always;
   }
 
-  /* 2. About Me：横向きを活かして1ページに収める */
+  .section-heading {
+    margin-bottom: 5mm;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .section-heading h2 {
+    font-size: 20pt;
+  }
+
+  /* About Me */
   .about-layout {
-    grid-template-columns: 34mm 1fr;
-    gap: 8mm;
+    display: grid;
+    grid-template-columns: 36mm 1fr;
+    gap: 6mm;
     max-width: none;
-    align-items: start;
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .profile-photo {
-    max-width: 34mm;
-    border-width: 4px;
-  }
-
-  .about-text h3 {
-    font-size: 15pt;
-  }
-
-  .english-name {
-    margin-bottom: 6px;
-  }
-
-  .about-text > p:not(.small-label):not(.english-name) {
-    font-size: 8pt;
-    line-height: 1.5;
-    margin-bottom: 4px;
+    max-width: 36mm;
+    border-width: 3px;
   }
 
   .sub-heading {
-    margin: 5mm 0 3mm;
-  }
-
-  .sub-heading h3 {
-    font-size: 14pt;
+    margin: 6mm 0 3mm;
+    break-after: avoid;
+    page-break-after: avoid;
   }
 
   .timeline {
     max-width: none;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6mm;
-    border-left: none;
-    border-top: 1px solid var(--pink);
-    padding-left: 0;
-    padding-top: 4mm;
   }
 
   .timeline-item {
-    padding: 2mm 0 0;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    padding-bottom: 3mm;
   }
 
-  .timeline-dot {
-    left: 0;
-    top: -6px;
-  }
-
-  .timeline-item h4 {
-    font-size: 9.5pt;
-  }
-
-  .timeline-item p:last-child {
-    font-size: 7.5pt;
-    line-height: 1.4;
-  }
-
-  /* 3. Skills：A4横向き1ページに収める */
+  /* Skills */
   .section-pink {
-    background: var(--pink-light);
+    background: #ffffff !important;
   }
 
   .skills-grid {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 4mm;
   }
 
   .skill-card {
-    padding: 4mm 5mm;
+    padding: 4mm;
     break-inside: avoid;
     page-break-inside: avoid;
   }
 
-  .skill-category {
-    font-size: 12pt;
-    padding-bottom: 4px;
-    margin-bottom: 6px;
-  }
-
-  .skill-item {
-    margin-bottom: 4px;
-    font-size: 8pt;
-  }
-
-  .stars {
-    font-size: 10pt;
-  }
-
-  .skill-note {
-    font-size: 7.5pt;
-    margin-top: 6px;
-  }
-
-  /* 4. Works：2列×2段（1ページ4作品目安）＆画像欠け防止 */
+  /* Works：flex/gridの改ページ被りを防ぐためブロック＋インラインブロックで配置 */
   .works-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5mm 6mm;
+    display: block !important;
+    font-size: 0; /* inline-block間の余白を消す */
   }
 
-  .work-card {
-    display: flex !important;
-    flex-direction: column;
-    break-inside: avoid;
-    page-break-inside: avoid;
+  .work-card,
+  .work-card.hidden {
+    display: inline-block !important;
+    vertical-align: top;
+    width: calc(50% - 2.5mm);
+    margin-right: 5mm;
+    margin-bottom: 5mm;
+    font-size: 8.5pt;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
     box-shadow: none !important;
     transform: none !important;
+    border: 1px solid var(--line);
+    background: #ffffff !important;
   }
 
-  .work-card.hidden {
-    display: flex !important;
+  /* 偶数番目（右列）の右マージンを消す */
+  .work-card:nth-child(even) {
+    margin-right: 0;
   }
 
-  /* 作品ジャンル（data-category）が変わるところで改ページ */
-  .work-card.category-break,
-  .work-card[data-category="graduation"] + .work-card:not([data-category="graduation"]),
-  .work-card[data-category="craft"] + .work-card:not([data-category="craft"]),
-  .work-card[data-category="design"] + .work-card:not([data-category="design"]),
-  .work-card[data-category="art"] + .work-card:not([data-category="art"]),
-  .work-card[data-category="fashion"] + .work-card:not([data-category="fashion"]),
-  .work-card[data-category="photo"] + .work-card:not([data-category="photo"]),
-  .work-card[data-category="work shop"] + .work-card:not([data-category="work shop"]) {
+  /* 作品の種類が変わるカードの手前で改ページ */
+  .work-card.category-break {
     break-before: page !important;
     page-break-before: always !important;
+    margin-left: 0;
   }
 
-  /* 画像が一切欠けないよう全体表示（contain）で統一 */
+  /* 条件1：作品画像が見切れなく全体表示される設定 */
   .work-image {
     width: 100%;
-    aspect-ratio: 297 / 210;
-    max-height: 45mm;
-    overflow: hidden;
+    height: auto !important;
+    min-height: 36mm;
+    max-height: 44mm;
+    aspect-ratio: auto !important;
+    overflow: visible !important;
     background: #ffffff !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2mm;
   }
 
   .work-image img,
   .work-image img.landscape,
   .work-image video {
-    width: 100% !important;
-    height: 100% !important;
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 40mm !important;
     object-fit: contain !important;
     object-position: center !important;
     background: #ffffff !important;
@@ -1198,7 +1141,9 @@ body.modal-open {
   }
 
   .work-info {
-    padding: 2.5mm 3.5mm;
+    padding: 2.5mm 3mm;
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .work-category {
@@ -1216,17 +1161,15 @@ body.modal-open {
     line-height: 1.4;
   }
 
-  /* 5. Contact：1ページに収める */
+  /* Contact */
   .contact-section {
-    background: var(--cream);
+    background: #ffffff !important;
   }
 
   .contact-content {
-    margin-top: 6mm;
-    padding: 8mm 10mm;
-  }
-
-  .print-page {
-    break-inside: auto;
+    margin-top: 8mm;
+    padding: 8mm;
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 }
