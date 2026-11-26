@@ -153,37 +153,24 @@ function preparePrintLayout() {
   const cards = Array.from(worksGrid.querySelectorAll(".work-card"));
   originalPrintOrder = cards;
 
-  const groupOrder = [];
-  const groupsMap = new Map();
-
-  cards.forEach((card) => {
-    const groupKey = card.dataset.printGroup || card.dataset.category || "other";
-    if (!groupsMap.has(groupKey)) {
-      groupsMap.set(groupKey, []);
-      groupOrder.push(groupKey);
-    }
-    groupsMap.get(groupKey).push(card);
-  });
-
   worksGrid.classList.add("has-print-groups");
-  groupOrder.forEach((groupKey) => {
+  for (let pageStart = 0; pageStart < cards.length; pageStart += 4) {
     const pageGroup = document.createElement("div");
     pageGroup.className = "print-page-group";
-    pageGroup.dataset.printGroup = groupKey;
 
-    const groupCards = groupsMap.get(groupKey);
-    for (let i = 0; i < groupCards.length; i += 2) {
+    const pageCards = cards.slice(pageStart, pageStart + 4);
+    for (let i = 0; i < pageCards.length; i += 2) {
       const row = document.createElement("div");
       row.className = "print-row";
-      row.appendChild(groupCards[i]);
-      if (groupCards[i + 1]) {
-        row.appendChild(groupCards[i + 1]);
+      row.appendChild(pageCards[i]);
+      if (pageCards[i + 1]) {
+        row.appendChild(pageCards[i + 1]);
       }
       pageGroup.appendChild(row);
     }
 
     worksGrid.appendChild(pageGroup);
-  });
+  }
 }
 
 function restorePrintLayout() {
