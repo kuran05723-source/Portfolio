@@ -1006,6 +1006,24 @@ body.modal-open {
     page-break-before: always !important;
   }
 
+  .section-heading {
+    margin-bottom: 6mm;
+  }
+
+  .section-heading h2 {
+    font-size: 28pt;
+    margin: 2mm 0;
+  }
+
+  .section-heading::after {
+    margin: 3mm auto 0;
+  }
+
+  .section-intro {
+    margin-bottom: 5mm;
+    line-height: 1.6;
+  }
+
   .section-heading,
   .sub-heading {
     break-after: avoid !important;
@@ -1033,6 +1051,34 @@ body.modal-open {
     border-width: 3px;
   }
 
+  .english-name {
+    margin-bottom: 4mm;
+  }
+
+  .about-text > p:not(.small-label):not(.english-name) {
+    margin-bottom: 3mm;
+  }
+
+  .sub-heading {
+    margin: 7mm 0 4mm;
+  }
+
+  .sub-heading h3 {
+    font-size: 16pt;
+  }
+
+  .timeline {
+    padding-left: 5mm;
+  }
+
+  .timeline-item {
+    padding: 0 0 4mm 5mm;
+  }
+
+  .timeline-dot {
+    left: -6.5mm;
+  }
+
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1043,55 +1089,62 @@ body.modal-open {
     padding: 4mm;
   }
 
-  /* 作品一覧：改ページ被りを防ぎつつ1ページ4作品目安（2列×2段） */
+  /* 作品一覧：指定されたページ分割ごとに2列グリッドで配置 */
   .works-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5mm 6mm;
+    align-items: stretch;
+  }
+
+  .works-grid.has-print-groups {
     display: block !important;
   }
 
-  .works-grid::after {
-    content: "";
-    display: block;
-    clear: both;
-  }
-
-  .work-card,
-  .work-card.hidden {
-    display: block !important;
-    float: left;
-    width: calc(50% - 3mm);
-    margin-right: 6mm;
-    margin-bottom: 5mm;
-    background-color: #ffffff !important;
-    border: 1px solid var(--line);
+  .print-page-group {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5mm 6mm;
+    align-items: stretch;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
 
-  .work-card:nth-child(2n) {
-    margin-right: 0;
-  }
-
-  /* 作品ジャンルが変わるカードの手前で改ページ */
-  .work-card.category-break {
-    clear: both !important;
-    margin-right: 0;
+  .print-page-group + .print-page-group {
     break-before: page !important;
     page-break-before: always !important;
   }
 
-  /* 作品画像が見切れなく全体表示される設定 */
-  .work-image {
-    display: block !important;
+  .work-card,
+  .work-card.hidden {
+    display: flex !important;
+    flex-direction: column;
     width: 100%;
-    height: auto !important;
-    aspect-ratio: auto !important;
-    overflow: visible !important;
+    margin: 0 !important;
     background-color: #ffffff !important;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* 作品画像が見切れず、2列で上下左右の基準が揃う設定 */
+  .work-image {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 54mm !important;
+    aspect-ratio: auto !important;
+    overflow: hidden !important;
+    background-color: #fffafb !important;
     background-image: none !important;
-    padding: 2mm;
+    border-bottom: 1px solid var(--line);
+    padding: 2.5mm !important;
     text-align: center;
   }
 
+  .image-placeholder span,
   .work-image span {
     display: none !important;
   }
@@ -1099,13 +1152,14 @@ body.modal-open {
   .work-image img,
   .work-image img.landscape,
   .work-image video {
-    display: inline-block !important;
+    display: block !important;
     width: auto !important;
     height: auto !important;
     max-width: 100% !important;
-    max-height: 42mm !important;
+    max-height: 49mm !important;
+    margin: 0 auto !important;
     object-fit: contain !important;
-    background-color: #ffffff !important;
+    background-color: transparent !important;
     cursor: default;
   }
 
