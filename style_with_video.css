@@ -1,8 +1,7 @@
-
 @charset "UTF-8";
 
 /* =================================
-   01. COLOR & BASIC SETTINGS
+01. COLOR & BASIC SETTINGS
 ================================= */
 
 :root {
@@ -70,20 +69,19 @@ button {
 #skills,
 #works,
 #contact {
-  scroll-margin-top:
-    calc(var(--header-height) + var(--jump-gap) - 30px);
+  scroll-margin-top: calc(var(--header-height) + var(--jump-gap) - 30px);
 }
 
 
 /* =================================
-   02. HEADER
+02. HEADER
 ================================= */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255,255,255,0.96);
+  background: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid var(--line);
 }
 
@@ -125,7 +123,7 @@ button {
 
 
 /* =================================
-   03. HOME
+03. HOME
 ================================= */
 
 .hero {
@@ -235,7 +233,7 @@ button {
 
 
 /* =================================
-   04. COMMON SECTIONS
+04. COMMON SECTIONS
 ================================= */
 
 .section {
@@ -287,7 +285,7 @@ button {
 
 
 /* =================================
-   05. ABOUT ME
+05. ABOUT ME
 ================================= */
 
 .about-layout {
@@ -398,7 +396,7 @@ button {
 
 
 /* =================================
-   06. SKILLS
+06. SKILLS
 ================================= */
 
 .section-pink {
@@ -463,7 +461,7 @@ button {
 
 
 /* =================================
-   07. WORKS
+07. WORKS & MEDIA DISPLAY
 ================================= */
 
 .works-section {
@@ -513,23 +511,17 @@ button {
 
 .work-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(130,100,110,0.08);
+  box-shadow: 0 10px 25px rgba(130, 100, 110, 0.08);
 }
 
 .work-card.hidden {
   display: none;
 }
 
-.work-image {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-}
-
 .image-placeholder {
   position: relative;
   overflow: hidden;
-  background:
-    linear-gradient(135deg, #fffafb, #f7eaf0);
+  background: linear-gradient(135deg, #fffafb, #f7eaf0);
 }
 
 .image-placeholder img {
@@ -552,10 +544,56 @@ button {
   letter-spacing: 2px;
   text-align: center;
   padding: 15px;
+  pointer-events: none;
 }
 
 .image-placeholder img:not([src]) {
   display: none;
+}
+
+/* 作品画像枠（A4横比率に統一） */
+.work-image {
+  width: 100%;
+  aspect-ratio: 297 / 210;
+  overflow: hidden;
+}
+
+/* Web画面表示：全体表示・クリック拡大 */
+.work-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: #fffafb;
+  cursor: zoom-in;
+  transition: opacity 0.3s;
+}
+
+.work-image img:hover {
+  opacity: 0.85;
+}
+
+.work-image img:focus-visible {
+  outline: 3px solid var(--pink-dark);
+  outline-offset: -3px;
+}
+
+/* 画面表示時のみ：横長クラスが付いた画像は中央基準で枠を埋める */
+@media screen {
+  .work-image img.landscape {
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+/* 動画：作品画像と同じ枠内に縦横比を保って表示 */
+.work-image video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: #fffafb;
 }
 
 .work-info {
@@ -582,9 +620,22 @@ button {
   margin-bottom: 0;
 }
 
+/* PDFリンク */
+.pdf-link {
+  color: #0066cc;
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+
+.pdf-link:hover {
+  color: #ff9900;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
 
 /* =================================
-   08. CONTACT
+08. CONTACT
 ================================= */
 
 .contact-section {
@@ -620,7 +671,7 @@ button {
 
 
 /* =================================
-   09. FOOTER
+09. FOOTER
 ================================= */
 
 .site-footer {
@@ -640,11 +691,106 @@ button {
 
 
 /* =================================
-   10. RESPONSIVE
+10. IMAGE MODAL
+================================= */
+
+.image-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(45, 35, 40, 0.88);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 65px;
+}
+
+.image-modal.open {
+  display: flex;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-image {
+  display: block;
+  max-width: 100%;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.2);
+}
+
+.modal-caption {
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.modal-counter {
+  color: #ddd0d5;
+  font-family: Georgia, serif;
+  font-size: 12px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 36px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.modal-prev,
+.modal-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 38px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.modal-prev {
+  left: 12px;
+}
+
+.modal-next {
+  right: 12px;
+}
+
+.modal-close:hover,
+.modal-prev:hover,
+.modal-next:hover {
+  color: var(--pink);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+
+/* =================================
+11. RESPONSIVE
 ================================= */
 
 @media screen and (max-width: 850px) {
-
   .about-layout {
     grid-template-columns: 180px 1fr;
     gap: 35px;
@@ -657,11 +803,9 @@ button {
   .works-grid {
     grid-template-columns: 1fr 1fr;
   }
-
 }
 
 @media screen and (max-width: 600px) {
-
   :root {
     --header-height: 65px;
   }
@@ -758,283 +902,6 @@ button {
     padding: 20px;
   }
 
-}
-
-
-/* =================================
-   11. A4 PRINT / PDF
-================================= */
-
-@page {
-  size: A4 portrait;
-  margin: 15mm;
-}
-
-@media print {
-
-  html {
-    scroll-behavior: auto;
-    scroll-padding-top: 0;
-  }
-
-  body {
-    font-size: 10pt;
-    line-height: 1.65;
-    background: white;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  .site-header,
-  .site-footer,
-  .work-filters {
-    display: none !important;
-  }
-
-  #home,
-  #about,
-  #skills,
-  #works,
-  #contact {
-    scroll-margin-top: 0;
-  }
-
-  .hero {
-    min-height: 0;
-    height: 267mm;
-    padding: 12mm;
-    break-after: page;
-    page-break-after: always;
-  }
-
-  .hero-content {
-    padding: 22mm 10mm;
-  }
-
-  .hero h1 {
-    font-size: 56pt;
-  }
-
-  .section {
-    max-width: none;
-    padding: 10mm 0;
-    margin: 0;
-  }
-
-  .section-heading {
-    margin-bottom: 10mm;
-  }
-
-  .section-heading h2 {
-    font-size: 30pt;
-  }
-
-  #about,
-  #skills,
-  #works,
-  #contact {
-    break-before: page;
-    page-break-before: always;
-  }
-
-  .about-layout {
-    grid-template-columns: 42mm 1fr;
-    gap: 9mm;
-  }
-
-  .about-text p {
-    font-size: 9pt;
-  }
-
-  .sub-heading {
-    margin-top: 14mm;
-  }
-
-  .timeline-item {
-    padding-bottom: 5mm;
-  }
-
-  .skills-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 5mm;
-  }
-
-  .skill-card {
-    padding: 6mm;
-  }
-
-  .works-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 7mm 5mm;
-  }
-
-  .work-card {
-    break-inside: avoid;
-    page-break-inside: avoid;
-    box-shadow: none !important;
-    transform: none !important;
-  }
-
-  .work-card.hidden {
-    display: block !important;
-  }
-
-  .work-image {
-    aspect-ratio: 4 / 3;
-  }
-
-  .work-info {
-    padding: 4mm;
-  }
-
-  .work-info h3 {
-    font-size: 12pt;
-  }
-
-  .section-pink {
-    background: var(--pink-light);
-  }
-
-  .contact-section {
-    background: white;
-  }
-
-  .contact-content {
-    margin-top: 25mm;
-  }
-
-  .print-page {
-    break-inside: auto;
-  }
-
-}
-
-
-/* =================================
-   WORK IMAGE DISPLAY
-================================= */
-
-/* 一覧では画像全体を表示 */
-.work-image img {
-  object-fit: contain;
-  cursor: zoom-in;
-  background: #fffafb;
-}
-
-/* 画像にマウスを重ねたとき */
-.work-image img:hover {
-  opacity: 0.85;
-  transition: opacity 0.3s;
-}
-
-.work-image img:focus-visible {
-  outline: 3px solid var(--pink-dark);
-  outline-offset: -3px;
-}
-
-
-/* =================================
-   IMAGE MODAL
-================================= */
-
-.image-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(45, 35, 40, 0.88);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 30px 65px;
-}
-
-.image-modal.open {
-  display: flex;
-}
-
-.modal-content {
-  position: relative;
-  max-width: 100%;
-  max-height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.modal-image {
-  display: block;
-  max-width: 100%;
-  max-height: 78vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  box-shadow: 0 5px 35px rgba(0,0,0,0.2);
-}
-
-.modal-caption {
-  color: white;
-  font-size: 14px;
-  text-align: center;
-  letter-spacing: 1px;
-}
-
-.modal-counter {
-  color: #ddd0d5;
-  font-family: Georgia, serif;
-  font-size: 12px;
-}
-
-.modal-close {
-  position: absolute;
-  top: 20px;
-  right: 25px;
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 36px;
-  cursor: pointer;
-  z-index: 2;
-}
-
-.modal-prev,
-.modal-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 38px;
-  cursor: pointer;
-  padding: 10px;
-}
-
-.modal-prev {
-  left: 12px;
-}
-
-.modal-next {
-  right: 12px;
-}
-
-.modal-close:hover,
-.modal-prev:hover,
-.modal-next:hover {
-  color: var(--pink);
-}
-
-body.modal-open {
-  overflow: hidden;
-}
-
-
-/* =================================
-   MOBILE MODAL
-================================= */
-
-@media screen and (max-width: 600px) {
-
   .image-modal {
     padding: 50px 35px;
   }
@@ -1061,164 +928,16 @@ body.modal-open {
     top: 12px;
     right: 15px;
   }
-
 }
 
 
 /* =================================
-   PRINT / PDF
+12. A4 LANDSCAPE PRINT / PDF
 ================================= */
 
-@media print {
-
-  .image-modal {
-    display: none !important;
-  }
-
-  .work-image img {
-    object-fit: contain;
-    background: white;
-  }
-
-}
-
-
-/* =================================
-   WORK IMAGE / A4 PORTRAIT
-================================= */
-
-/* 作品画像の枠をA4縦の比率に統一 */
-.work-image {
-  width: 100%;
-  aspect-ratio: 210 / 297;
-  overflow: hidden;
-}
-
-
-/* =================================
-   WORK IMAGE / A4 LANDSCAPE
-================================= */
-
-/* 作品画像の枠をA4横に統一 */
-.work-image {
-  width: 100%;
-  aspect-ratio: 297 / 210;
-  overflow: hidden;
-}
-
-/* 画像を切り抜かずに全体表示 */
-.work-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-}
-
-/* PDF・印刷時 */
-@media print {
-  .work-image {
-    aspect-ratio: 297 / 210;
-  }
-
-  .work-image img {
-    object-fit: contain;
-  }
-}
-
-
-/* =================================
-   WORK IMAGE / AUTO FIT
-================================= */
-
-/* A4横の画像枠 */
-.work-image {
-  width: 100%;
-  aspect-ratio: 297 / 210;
-  overflow: hidden;
-}
-
-/* 通常は画像全体を表示 */
-.work-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-}
-
-/* 横長画像だけ中央を基準に余白を埋める */
-.work-image img.landscape {
-  object-fit: cover;
-  object-position: center center;
-}
-
-/* PDFでも同じ表示 */
-@media print {
-  .work-image {
-    aspect-ratio: 297 / 210;
-  }
-}
-
-/* 通常のとき（下線あり・青文字） */
-.pdf-link {
-  color: #0066cc;
-  text-decoration: underline;
-  transition: all 0.3s ease; /* 変化をふわっと滑らかにする効果 */
-}
-
-/* マウスオーバーしたとき（下線が消えて、色がオレンジに変わる） */
-.pdf-link:hover {
-  color: #ff9900;
-  text-decoration: none; /* 下線を消す */
-  opacity: 0.8;          /* 少し透明にする */
-}
-
-
-/* 動画：作品画像と同じ枠内に、縦横比を保って全体表示 */
-.work-image video {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  background: #fffafb;
-}
-
-/* 動画・画像上の作品番号表示がクリックを妨げないようにする */
-.image-placeholder span {
-  pointer-events: none;
-}
-
-/* =================================
-   SCREEN / PRINT IMAGE SEPARATION
-================================= */
-@media screen {
-  .work-image {
-    width: 100%;
-    aspect-ratio: 297 / 210;
-    overflow: hidden;
-  }
-
-  .work-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-    background: #fffafb;
-    cursor: zoom-in;
-  }
-
-  .work-image img.landscape {
-    object-fit: cover;
-    object-position: center center;
-  }
-}
-
-/* =================================
-   A4 LANDSCAPE PRINT / PDF LAYOUT
-================================= */
 @page {
   size: A4 landscape;
-  margin: 12mm;
+  margin: 10mm;
 }
 
 @media print {
@@ -1229,14 +948,14 @@ body.modal-open {
 
   body {
     font-size: 9pt;
-    line-height: 1.55;
+    line-height: 1.5;
     background: #ffffff;
     color: var(--text);
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  /* 不要なUI・リンク・モーダルを非表示 */
+  /* 印刷不要要素を非表示 */
   .site-header,
   .menu-toggle,
   .site-footer,
@@ -1254,11 +973,11 @@ body.modal-open {
     scroll-margin-top: 0;
   }
 
-  /* 表紙：A4横向き1ページに程よく収める */
+  /* 1. 表紙（HOME）：A4横向き1ページに収める */
   .hero {
     min-height: 0;
-    height: 184mm;
-    padding: 10mm 14mm;
+    height: 186mm;
+    padding: 8mm 12mm;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1269,54 +988,54 @@ body.modal-open {
 
   .hero-content {
     width: 100%;
-    max-width: 220mm;
-    padding: 14mm 18mm;
+    max-width: 230mm;
+    padding: 12mm 16mm;
   }
 
   .hero h1 {
-    font-size: 40pt;
-    margin: 12px 0;
+    font-size: 38pt;
+    margin: 10px 0;
   }
 
   .hero-message {
-    margin-top: 16px;
-    line-height: 1.85;
+    margin-top: 14px;
+    line-height: 1.8;
   }
 
   .hero-ribbon {
-    margin-top: 14px;
-    font-size: 20pt;
+    margin-top: 12px;
+    font-size: 18pt;
   }
 
   .hero-bottom {
-    margin-top: 14px;
+    margin-top: 12px;
   }
 
   /* 共通セクション */
   .section {
     max-width: none;
-    padding: 6mm 4mm;
+    padding: 4mm 2mm;
     margin: 0;
   }
 
   .section-heading {
-    margin-bottom: 7mm;
+    margin-bottom: 4mm;
   }
 
   .section-heading::after {
-    margin-top: 10px;
+    margin-top: 6px;
   }
 
   .section-heading h2 {
-    font-size: 24pt;
+    font-size: 20pt;
   }
 
   .section-intro {
-    margin-bottom: 7mm;
-    line-height: 1.65;
+    margin-bottom: 4mm;
+    line-height: 1.5;
   }
 
-  /* セクションごとに改ページ */
+  /* メインセクションごとに改ページ */
   #about,
   #skills,
   #works,
@@ -1325,79 +1044,116 @@ body.modal-open {
     page-break-before: always;
   }
 
-  /* About Me */
+  /* 2. About Me：横向きを活かして1ページに収める */
   .about-layout {
-    grid-template-columns: 42mm 1fr;
-    gap: 10mm;
+    grid-template-columns: 34mm 1fr;
+    gap: 8mm;
     max-width: none;
     align-items: start;
   }
 
   .profile-photo {
-    max-width: 42mm;
+    max-width: 34mm;
     border-width: 4px;
   }
 
-  .about-text p {
-    font-size: 8.5pt;
-    line-height: 1.65;
+  .about-text h3 {
+    font-size: 15pt;
+  }
+
+  .english-name {
     margin-bottom: 6px;
   }
 
+  .about-text > p:not(.small-label):not(.english-name) {
+    font-size: 8pt;
+    line-height: 1.5;
+    margin-bottom: 4px;
+  }
+
   .sub-heading {
-    margin: 8mm 0 4mm;
+    margin: 5mm 0 3mm;
   }
 
   .sub-heading h3 {
-    font-size: 17pt;
+    font-size: 14pt;
   }
 
   .timeline {
     max-width: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6mm;
+    border-left: none;
+    border-top: 1px solid var(--pink);
+    padding-left: 0;
+    padding-top: 4mm;
   }
 
   .timeline-item {
-    padding-bottom: 4.5mm;
+    padding: 2mm 0 0;
+  }
+
+  .timeline-dot {
+    left: 0;
+    top: -6px;
+  }
+
+  .timeline-item h4 {
+    font-size: 9.5pt;
   }
 
   .timeline-item p:last-child {
-    font-size: 8.5pt;
+    font-size: 7.5pt;
+    line-height: 1.4;
   }
 
-  /* Skills：程よい余白で2列配置 */
+  /* 3. Skills：A4横向き1ページに収める */
+  .section-pink {
+    background: var(--pink-light);
+  }
+
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 5mm;
+    gap: 4mm;
   }
 
   .skill-card {
-    padding: 5mm 6mm;
+    padding: 4mm 5mm;
     break-inside: avoid;
     page-break-inside: avoid;
   }
 
   .skill-category {
-    font-size: 13pt;
-    padding-bottom: 6px;
-    margin-bottom: 8px;
+    font-size: 12pt;
+    padding-bottom: 4px;
+    margin-bottom: 6px;
   }
 
   .skill-item {
-    margin-bottom: 6px;
-    font-size: 8.5pt;
+    margin-bottom: 4px;
+    font-size: 8pt;
   }
 
   .stars {
-    font-size: 11pt;
+    font-size: 10pt;
   }
 
-  /* Works：3列グリッドで程よい間隔 */
+  .skill-note {
+    font-size: 7.5pt;
+    margin-top: 6px;
+  }
+
+  /* 4. Works：2列×2段（1ページ4作品目安）＆画像欠け防止 */
   .works-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6mm 5mm;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5mm 6mm;
   }
 
   .work-card {
+    display: flex !important;
+    flex-direction: column;
     break-inside: avoid;
     page-break-inside: avoid;
     box-shadow: none !important;
@@ -1406,75 +1162,68 @@ body.modal-open {
 
   .work-card.hidden {
     display: flex !important;
-    flex-direction: column;
   }
 
+  /* 作品ジャンル（data-category）が変わるところで改ページ */
+  .work-card.category-break,
+  .work-card[data-category="graduation"] + .work-card:not([data-category="graduation"]),
+  .work-card[data-category="craft"] + .work-card:not([data-category="craft"]),
+  .work-card[data-category="design"] + .work-card:not([data-category="design"]),
+  .work-card[data-category="art"] + .work-card:not([data-category="art"]),
+  .work-card[data-category="fashion"] + .work-card:not([data-category="fashion"]),
+  .work-card[data-category="photo"] + .work-card:not([data-category="photo"]),
+  .work-card[data-category="work shop"] + .work-card:not([data-category="work shop"]) {
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+
+  /* 画像が一切欠けないよう全体表示（contain）で統一 */
   .work-image {
+    width: 100%;
     aspect-ratio: 297 / 210;
-    max-height: 36mm;
+    max-height: 45mm;
     overflow: hidden;
+    background: #ffffff !important;
   }
 
-  .work-image img {
-    width: 100%;
-    height: 100%;
+  .work-image img,
+  .work-image img.landscape,
+  .work-image video {
+    width: 100% !important;
+    height: 100% !important;
     object-fit: contain !important;
-    object-position: center;
+    object-position: center !important;
     background: #ffffff !important;
     cursor: default;
   }
 
-  /* 動画枠の印刷表示 */
-  .work-image video {
-    display: none !important;
-  }
-
-  .work-card:has(.work-video) .work-image::after {
-    content: "TIMELAPSE VIDEO (Web版にて再生可能)";
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    min-height: 30mm;
-    font-size: 8pt;
-    color: var(--pink-dark);
-    background: #fffafb;
-    text-align: center;
-    padding: 4mm;
-  }
-
   .work-info {
-    padding: 3.5mm 4mm;
+    padding: 2.5mm 3.5mm;
   }
 
   .work-category {
-    font-size: 7pt;
-    margin-bottom: 2px;
+    font-size: 6.5pt;
+    margin-bottom: 1px;
   }
 
   .work-info h3 {
-    font-size: 10pt;
-    margin-bottom: 3px;
+    font-size: 9pt;
+    margin-bottom: 2px;
   }
 
   .work-info > p:last-child {
-    font-size: 7.5pt;
-    line-height: 1.5;
+    font-size: 7.2pt;
+    line-height: 1.4;
   }
 
-  /* 背景色の維持 */
-  .section-pink {
-    background: var(--pink-light);
-  }
-
+  /* 5. Contact：1ページに収める */
   .contact-section {
     background: var(--cream);
   }
 
   .contact-content {
-    margin-top: 8mm;
-    padding: 9mm 12mm;
+    margin-top: 6mm;
+    padding: 8mm 10mm;
   }
 
   .print-page {
